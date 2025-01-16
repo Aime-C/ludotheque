@@ -1,0 +1,95 @@
+<div class="container mx-auto">
+	<th:block th:if="${client.noClient != null }">	
+    <h2>Modifier le client</h2>
+	</th:block>
+	<th:block th:unless="${client.noClient != null }">	
+    <h2>Ajouter un client</h2>
+	</th:block>
+	
+	<th:block th:object="${client}">
+
+	<div style="color: red;" th:if="${#fields.hasErrors('*')}" >
+	<p th:text="#{erreurs}">Message d'erreur</p>
+	</div>
+	
+	
+    <form action="/clients/enregistrer" method="post">
+
+
+        <input type="hidden" th:field="*{noClient}" id="noClient">
+
+        <div>
+            <label for="nom">Nom *: </label>
+        <input type="text" th:field="*{nom}" id="nom">
+				<div style="color: red;" th:if="${#fields.hasErrors('nom')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('nom')}" th:text="${erreur}"></li>
+					</ul>
+				</div>
+			</div>
+
+        <div>
+            <label for="prenom">Prénom *:</label>
+        <input type="text" th:field="*{prenom}" id="prenom">
+<div style="color: red;" th:if="${#fields.hasErrors('prenom')}">
+	<ul>
+		<li th:each="erreur: ${#fields.errors('prenom')}" th:text="${erreur}"></li>
+	</ul>
+	</div>
+        </div>
+
+        <div>
+            <label for="email">email *:</label>
+            <input type="text" th:field="*{email}" id="email">
+<div style="color: red;" th:if="${#fields.hasErrors('email')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('email')}" th:text="${erreur}"></li>
+					</ul>
+				</div>            
+        </div>
+
+        <div>
+            <label for="telephone">telephone:</label>
+            <input type="text" th:field="*{noTelephone}" id="telephone">
+            <div style="color: red;" th:if="${#fields.hasErrors('noTelephone')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('noTelephone')}" th:text="${erreur}"></li>
+					</ul>
+				</div>
+        </div>
+
+        <div>
+            <label for="rue">rue *:</label>
+            <input type="text" th:field="*{rue}" id="rue">
+            <div style="color: red;" th:if="${#fields.hasErrors('rue')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('rue')}" th:text="${erreur}"></li>
+					</ul>
+				</div>
+        </div>
+
+        <div>
+            <label for="codePostal">code postal *:</label>
+            <input type="text" th:field="*{codePostal}" id="codePostal">
+            <div style="color: red;" th:if="${#fields.hasErrors('codePostal')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('codePostal')}" th:text="${erreur}"></li>
+					</ul>
+				</div>
+        </div>
+
+        <div>
+            <label for="ville">ville *:</label>
+            <input type="text" th:field="*{ville}" id="ville">
+            <div style="color: red;" th:if="${#fields.hasErrors('ville')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('ville')}" th:text="${erreur}"></li>
+					</ul>
+				</div>
+        </div>
+
+        <button type="submit">Enregistrer</button>
+
+    </form>
+    </th:block>
+</div>

@@ -1,0 +1,31 @@
+<div class="container mx-auto">
+    <h1>[[${jeu.titre}]]</h1>
+	
+		<div>
+            <span>Référence : </span>
+            <span th:text="${jeu.reference}"></span>
+         </div>
+		<div>
+            <span>Description : </span>
+            <span th:text="${jeu.description}"></span>
+         </div>
+		<div>
+            <span>Tarif à la journée : </span>
+            <span >[[${jeu.tarifJournee}]] Euros</span>
+         </div>
+		<div>
+            <span>Age minimum : </span>
+            <span >[[${jeu.ageMin}]] ans</span>
+         </div>
+		<div>
+            <span>duree : </span>
+            <span >[[${jeu.duree}]] minutes</span>
+         </div>
+		<div>
+            <span>Genres :</span>
+            <th:block th:each="genre: ${jeu.genres}" >            
+            <span th:text="${genre.libelle}"></span>&nbsp;
+            </th:block>
+         </div>
+
+</div>

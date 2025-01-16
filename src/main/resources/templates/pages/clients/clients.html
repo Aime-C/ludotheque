@@ -1,0 +1,41 @@
+<div class="container mx-auto">
+    <h1>Liste des clients</h1>
+	
+    <a href="/clients/ajouter" class="rounded border-2 border-sky-500">Ajouter un client</a>
+
+    <table class="min-w-full table-auto border-collapse">
+        <thead>
+        <tr>
+            <td class="px-4 py-2 border border-sky-500">Nom</td>
+            <td class="px-4 py-2 border border-sky-500">Prénom</td>
+            <td class="px-4 py-2 border border-sky-500">Email</td>
+            <td class="px-4 py-2 border border-sky-500">Telephone</td>
+            <td class="px-4 py-2 border border-sky-500">Adresse</td>
+            <td class="px-4 py-2 border border-sky-500">Action</td>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client: ${clients}">
+            <td class="px-4 py-2 border border-sky-500" th:text="${client.nom}"></td>
+            <td class="px-4 py-2 border border-sky-500" th:text="${client.prenom}"></td>
+            <td class="px-4 py-2 border border-sky-500" th:text="${client.email}"></td>
+            <td class="px-4 py-2 border border-sky-500" th:text="${client.noTelephone}"></td>
+            <td class="px-4 py-2 border border-sky-500" >
+            [[${client.rue}]] [[${client.codePostal}]] [[${client.ville}]]
+            </td>
+            <td class="px-4 py-2 border border-sky-500">
+                <a th:href="@{'clients/modifier?noClient=' + ${client.noClient}}" class="text-blue-500 hover:text-blue-700">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span> Modifier </span> 
+                </a>
+                <span>&nbsp;&nbsp;</span>
+                <a th:href="@{'clients/supprimer/' + ${client.noClient}}" class="text-red-500 hover:text-red-700 ml-4">
+                    <i class="fas fa-trash"></i>
+                     <span> Supprimer</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

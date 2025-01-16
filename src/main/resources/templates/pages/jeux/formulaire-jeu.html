@@ -1,0 +1,111 @@
+<div class="container mx-auto">
+	<th:block th:if="${jeu.noJeu != null }">
+		<h2>Modifier le jeu</h2>
+	</th:block>
+	<th:block th:unless="${jeu.noJeu != null }">
+		<h2>Ajouter un jeu</h2>
+	</th:block>
+
+	<th:block th:object="${jeu}">
+
+		<div style="color: red;" th:if="${#fields.hasErrors('*')}">
+			<p th:text="#{erreurs}">Message d'erreur</p>
+		</div>
+
+		<form action="/jeux/enregistrer" method="post">
+
+			<input type="hidden" th:field="*{noJeu}" id="noJeu">
+
+			<div>
+				<label for="titre">Titre *: </label> <input type="text"
+					th:field="*{titre}" id="titre">
+				<div style="color: red;" th:if="${#fields.hasErrors('titre')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('titre')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div>
+				<label for="reference">Référence *:</label> <input type="text"
+					th:field="*{reference}" id="reference">
+				<div style="color: red;" th:if="${#fields.hasErrors('reference')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('reference')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div>
+				<label for="description">description *:</label> <input type="text"
+					th:field="*{description}" id="description">
+				<div style="color: red;" th:if="${#fields.hasErrors('description')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('description')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div>
+				<label for="tarifJournee">Tarif à la journée:</label> <input
+					type="text" th:field="*{tarifJournee}" id="tarifJournee">
+				<div style="color: red;" th:if="${#fields.hasErrors('tarifJournee')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('tarifJournee')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div>
+				<label for="ageMin">Age minimum *:</label> <input type="text"
+					th:field="*{ageMin}" id="ageMin">
+				<div style="color: red;" th:if="${#fields.hasErrors('ageMin')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('ageMin')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div>
+				<label for="duree">duree *:</label> <input type="text"
+					th:field="*{duree}" id="duree">
+				<div style="color: red;" th:if="${#fields.hasErrors('duree')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('duree')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+			
+			<div>
+				<label for="genres">genres *:</label> 
+				<select name="genres" id="genres"
+					multiple size="5">
+					<option th:each="genre: ${@ludobean.genres}"
+						th:text="${genre.libelle}" 
+						th:value="${genre.noGenre}"
+						th:selected="${@ludobean.isGenreSelected(jeu, genre.noGenre)}"></option>
+				</select>
+				<div style="color: red;" th:if="${#fields.hasErrors('genres')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('genres')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+			<button type="submit">Enregistrer</button>
+
+		</form>
+	</th:block>
+</div>

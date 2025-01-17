@@ -73,4 +73,10 @@ public class JeuRepositoryBouchonImpl implements JeuRepository{
 		return liste;
 	}
 
+	@Override
+	public void deleteExemplaire(int noExemplaire) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

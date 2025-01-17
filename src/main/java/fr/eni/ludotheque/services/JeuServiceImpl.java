@@ -68,5 +68,10 @@ public class JeuServiceImpl implements JeuService{
 		return jeuRepo.getAllExemplaires(id);
 		
 	}
+	
+	@Override
+	public void deleteExemplaire(int noExemplaire) {
+		jeuRepo.deleteExemplaire(noExemplaire);
+	}
 
 }

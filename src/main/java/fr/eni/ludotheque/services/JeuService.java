@@ -10,4 +10,6 @@ public interface JeuService extends ICrudService <Jeu>{
 
 	List<Exemplaire> getAllExemplaires(int id);
 
+	void deleteExemplaire(int noExemplaire);
+
 }

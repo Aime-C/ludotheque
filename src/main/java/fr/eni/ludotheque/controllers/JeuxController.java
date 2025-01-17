@@ -48,6 +48,8 @@ public class JeuxController {
     		//TODO : Erreur
     		throw new RuntimeException("Le jeu " + noJeu +" n'a pas été trouvé. ");
     	}
+    	List<Exemplaire> exemplaires = jeuService.getAllExemplaires(noJeu);
+        model.addAttribute("exemplaires", exemplaires);
         model.addAttribute("jeu", optJeu.get());
         model.addAttribute("body", "pages/jeux/jeu");
         return "index";
@@ -91,12 +93,14 @@ public class JeuxController {
         return "redirect:/jeux";
     }
     
-    @GetMapping("/{noJeu}/exemplaires")
-    public String pageExemplairesJeu(@PathVariable("noJeu") Integer noJeu, Model model) {
-    	
+    @GetMapping("/{noJeu}/afficher/supprimer/{no_exemplaire_jeu}")
+    public String pageSupprimerExemplaire(@PathVariable("noJeu") Integer noJeu, @PathVariable("no_exemplaire_jeu") Integer noExemplaire, Model model) {
+    	jeuService.deleteExemplaire(noExemplaire);
+    	Optional<Jeu> optJeu = jeuService.getById(noJeu);
     	List<Exemplaire> exemplaires = jeuService.getAllExemplaires(noJeu);
         model.addAttribute("exemplaires", exemplaires);
-        model.addAttribute("body", "pages/jeux/exemplaires");
+        model.addAttribute("jeu", optJeu.get());
+        model.addAttribute("body", "pages/jeux/jeu");
         return "index";
     }
 }

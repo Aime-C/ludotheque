@@ -10,4 +10,6 @@ public interface JeuRepository extends ICrudRepository<Jeu>{
 	List<Genre> getGenresByNoJeu(Integer noJeu);
 
 	List<Exemplaire> getAllExemplaires(int noJeu);
+
+	void deleteExemplaire(int noExemplaire);
 }

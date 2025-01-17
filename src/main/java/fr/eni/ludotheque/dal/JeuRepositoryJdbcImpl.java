@@ -126,6 +126,16 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 		return exemplaires;
 		
 	}
+	
+	@Override
+	public void deleteExemplaire(int noExemplaire) {
+		String sql = "DELETE FROM exemplaires_jeux WHERE no_exemplaire_jeu =  ? ";
+		jdbcTemplate.update(sql, noExemplaire);
+		
+		sql = "DELETE FROM exemplaires_jeux WHERE no_exemplaire_jeu =  ?";
+		int nbRows = jdbcTemplate.update(sql, noExemplaire);
+		
+	}
 
 	@Override
 	public List<Genre> getGenresByNoJeu(Integer noJeu) {		

@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Genre;
 import fr.eni.ludotheque.bo.Jeu;
 
@@ -64,6 +65,12 @@ public class JeuRepositoryBouchonImpl implements JeuRepository{
 	public List<Genre> getGenresByNoJeu(Integer noJeu) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Exemplaire> getAllExemplaires(int noJeu) {
+		List<Exemplaire> liste = null;
+		return liste;
 	}
 
 }

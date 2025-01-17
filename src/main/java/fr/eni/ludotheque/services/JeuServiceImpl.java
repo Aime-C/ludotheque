@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Jeu;
 import fr.eni.ludotheque.dal.GenreRepository;
 import fr.eni.ludotheque.dal.JeuRepository;
@@ -59,6 +60,12 @@ public class JeuServiceImpl implements JeuService{
 	@Override
 	public void delete(int id) {
 		jeuRepo.delete(id);
+		
+	}
+	
+	@Override
+	public List<Exemplaire> getAllExemplaires(int id) {
+		return jeuRepo.getAllExemplaires(id);
 		
 	}
 

@@ -17,6 +17,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Genre;
 import fr.eni.ludotheque.bo.Jeu;
 
@@ -114,6 +115,15 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 		if(nbRows != 1) {
 			throw new RuntimeException("La suppression du jeu a échouée : no_jeu= " +noJeu );
 		}
+		
+	}
+	
+	@Override
+	public List<Exemplaire> getAllExemplaires(int noJeu) {
+		String sql = "SELECT ej.no_exemplaire_jeu, ej.codebarre, ej.louable FROM exemplaires_jeux as ej INNER JOIN jeux ON jeux.no_jeu = ej.no_jeu WHERE jeux.no_jeu = ?";
+		List<Exemplaire> exemplaires = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Exemplaire.class), noJeu);
+				
+		return exemplaires;
 		
 	}
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Jeu;
 import fr.eni.ludotheque.services.JeuService;
 import jakarta.validation.Valid;
@@ -88,5 +89,14 @@ public class JeuxController {
         jeuService.delete(noJeu);
         model.addAttribute("body", "pages/jeux/formulaire-jeu");
         return "redirect:/jeux";
+    }
+    
+    @GetMapping("/{noJeu}/exemplaires")
+    public String pageExemplairesJeu(@PathVariable("noJeu") Integer noJeu, Model model) {
+    	
+    	List<Exemplaire> exemplaires = jeuService.getAllExemplaires(noJeu);
+        model.addAttribute("exemplaires", exemplaires);
+        model.addAttribute("body", "pages/jeux/exemplaires");
+        return "index";
     }
 }

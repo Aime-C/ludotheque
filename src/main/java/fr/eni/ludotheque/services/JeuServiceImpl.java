@@ -75,8 +75,8 @@ public class JeuServiceImpl implements JeuService{
 	}
 	
 	@Override
-	public void updateExemplaire(int noExemplaire) {
-		jeuRepo.updateExemplaire(noExemplaire);
+	public void updateExemplaire(Exemplaire exemplaire) {
+		jeuRepo.updateExemplaire(exemplaire);
 	}
 	
 	@Override

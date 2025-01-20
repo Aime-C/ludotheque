@@ -1,5 +1,8 @@
 package fr.eni.ludotheque.bo;
 
+import org.checkerframework.common.aliasing.qual.Unique;
+import org.hibernate.validator.constraints.UniqueElements;
+
 public class Exemplaire {
 
 	private Integer no_exemplaire_jeu;

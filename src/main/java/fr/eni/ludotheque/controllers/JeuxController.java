@@ -106,4 +106,14 @@ public class JeuxController {
     	model.addAttribute("body", "pages/jeux/formulaire-exemplaire");
     	return "index";
     }
+    
+    @PostMapping("/{noJeu}/afficher/modifier/enregistrer")
+    public String saveExemplaire(@PathVariable("noJeu") Integer noJeu, Model model, @Valid Exemplaire exemplaire,  BindingResult bindingResult ) {
+    	model.addAttribute("body", "pages/jeux/formulaire-jeu");
+    	if(bindingResult.hasErrors()) {
+    		return "index";
+    	}
+        jeuService.updateExemplaire(exemplaire);
+        return "redirect:/jeux/"+noJeu+"/afficher";
+    }
 }

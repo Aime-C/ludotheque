@@ -80,7 +80,7 @@ public abstract class JeuRepositoryBouchonImpl implements JeuRepository{
 	}
 
 	@Override
-	public void updateExemplaire(int noExemplaire) {
+	public void updateExemplaire(Exemplaire exemplaire) {
 		// TODO Auto-generated method stub
 		
 	}

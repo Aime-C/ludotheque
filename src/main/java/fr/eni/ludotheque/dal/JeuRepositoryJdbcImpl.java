@@ -138,12 +138,9 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 	}
 	
 	@Override
-	public void updateExemplaire(int noExemplaire) {
-		String sql = "DELETE FROM exemplaires_jeux WHERE no_exemplaire_jeu =  ? ";
-		jdbcTemplate.update(sql, noExemplaire);
-		
-		sql = "DELETE FROM exemplaires_jeux WHERE no_exemplaire_jeu =  ?";
-		int nbRows = jdbcTemplate.update(sql, noExemplaire);
+	public void updateExemplaire(Exemplaire exemplaire) {
+		String sql = "UPDATE exemplaires_jeux SET codebarre = ?, louable = ? WHERE no_exemplaire_jeu = ?";
+		jdbcTemplate.update(sql, exemplaire.getCodebarre(), exemplaire.getLouable(), exemplaire.getNo_exemplaire_jeu());
 		
 	}
 

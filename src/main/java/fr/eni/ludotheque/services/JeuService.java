@@ -13,7 +13,7 @@ public interface JeuService extends ICrudService <Jeu>{
 
 	void deleteExemplaire(int noExemplaire);
 
-	void updateExemplaire(int noExemplaire);
+	void updateExemplaire(Exemplaire exemplaire);
 
 	Optional<Exemplaire> getExemplaireById(int noExemplaire);
 

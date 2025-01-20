@@ -3,13 +3,13 @@
 
 	<th:block th:object="${exemplaire}">
 	
-		<form action="'/' + ${exemplaire.no_exemplaire_jeu}" method="post">
+		<form action="enregistrer" method="post">
 
-			<input type="hidden" th:field="*{no_exemplaire_jeu}" id="noJeu">
+			<input type="hidden" th:field="*{no_exemplaire_jeu}" id="no_exemplaire_jeu">
 
 			<div>
-				<label for="titre">CodeBarre : </label> <input type="text"
-					th:field="*{codebarre}" id="titre">
+				<label for="codebarre">CodeBarre : </label> <input type="text"
+					th:field="*{codebarre}" id="codebarre">
 				<div style="color: red;" th:if="${#fields.hasErrors('codebarre')}">
 					<ul>
 						<li th:each="erreur: ${#fields.errors('codebarre')}"
@@ -19,8 +19,8 @@
 			</div>
 
 			<div>
-				<label for="reference">Louable : </label> <input type="checkbox"
-					th:field="*{louable}" id="reference">
+				<label for="louable">Louable : </label> <input type="checkbox"
+					th:field="*{louable}" id="louable">
 				<div style="color: red;" th:if="${#fields.hasErrors('louable')}">
 					<ul>
 						<li th:each="erreur: ${#fields.errors('louable')}"

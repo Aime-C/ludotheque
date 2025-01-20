@@ -1,0 +1,36 @@
+<div class="container mx-auto">
+		<h2>Modifier l'exemplaire</h2>
+
+	<th:block th:object="${exemplaire}">
+	
+		<form action="'/' + ${exemplaire.no_exemplaire_jeu}" method="post">
+
+			<input type="hidden" th:field="*{no_exemplaire_jeu}" id="noJeu">
+
+			<div>
+				<label for="titre">CodeBarre : </label> <input type="text"
+					th:field="*{codebarre}" id="titre">
+				<div style="color: red;" th:if="${#fields.hasErrors('codebarre')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('codebarre')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div>
+				<label for="reference">Louable : </label> <input type="checkbox"
+					th:field="*{louable}" id="reference">
+				<div style="color: red;" th:if="${#fields.hasErrors('louable')}">
+					<ul>
+						<li th:each="erreur: ${#fields.errors('louable')}"
+							th:text="${erreur}"></li>
+					</ul>
+				</div>
+
+			</div>
+			<button type="submit">Enregistrer</button>
+
+		</form>
+	</th:block>
+</div>

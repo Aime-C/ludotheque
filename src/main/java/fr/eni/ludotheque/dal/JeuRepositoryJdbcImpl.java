@@ -120,7 +120,7 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 	
 	@Override
 	public List<Exemplaire> getAllExemplaires(int noJeu) {
-		String sql = "SELECT ej.no_exemplaire_jeu, ej.codebarre, ej.louable FROM exemplaires_jeux as ej INNER JOIN jeux ON jeux.no_jeu = ej.no_jeu WHERE jeux.no_jeu = ?";
+		String sql = "SELECT ej.no_exemplaire_jeu, ej.codebarre, ej.louable FROM exemplaires_jeux as ej INNER JOIN jeux ON jeux.no_jeu = ej.no_jeu WHERE jeux.no_jeu = ? ORDER BY no_exemplaire_jeu ASC";
 		List<Exemplaire> exemplaires = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Exemplaire.class), noJeu);
 				
 		return exemplaires;
@@ -136,7 +136,25 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 		int nbRows = jdbcTemplate.update(sql, noExemplaire);
 		
 	}
+	
+	@Override
+	public void updateExemplaire(int noExemplaire) {
+		String sql = "DELETE FROM exemplaires_jeux WHERE no_exemplaire_jeu =  ? ";
+		jdbcTemplate.update(sql, noExemplaire);
+		
+		sql = "DELETE FROM exemplaires_jeux WHERE no_exemplaire_jeu =  ?";
+		int nbRows = jdbcTemplate.update(sql, noExemplaire);
+		
+	}
 
+	@Override
+	public Optional<Exemplaire> getExemplaireById(int id) {
+		String sql = "SELECT * FROM public.exemplaires_jeux WHERE no_exemplaire_jeu = ?";
+		Exemplaire exemplaire = jdbcTemplate.queryForObject(sql,
+				new BeanPropertyRowMapper<>(Exemplaire.class), id);
+
+		return Optional.ofNullable(exemplaire);
+	}
 	@Override
 	public List<Genre> getGenresByNoJeu(Integer noJeu) {		
 		String sql = "select genres.no_genre as noGenre, libelle "

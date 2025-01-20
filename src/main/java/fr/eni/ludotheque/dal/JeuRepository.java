@@ -1,6 +1,7 @@
 package fr.eni.ludotheque.dal;
 
 import java.util.List;
+import java.util.Optional;
 
 import fr.eni.ludotheque.bo.Exemplaire;
 import fr.eni.ludotheque.bo.Genre;
@@ -12,4 +13,8 @@ public interface JeuRepository extends ICrudRepository<Jeu>{
 	List<Exemplaire> getAllExemplaires(int noJeu);
 
 	void deleteExemplaire(int noExemplaire);
+
+	void updateExemplaire(int noExemplaire);
+
+	Optional<Exemplaire> getExemplaireById(int id);
 }

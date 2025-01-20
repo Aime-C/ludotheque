@@ -26,10 +26,15 @@
 				<span th:text="${genre.libelle}"></span>&nbsp;
             </th:block>
 		</div>
+		<div>
+			<a th:href="@{'afficher/ajouter/'}" class="text-green-500 hover:text-green-700"> <i
+				class="fas fa-plus"></i> <span> Ajouter un exemplaire</span>
+			</a>
+		</div>
 
 	</div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 m-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 m-10">
 
 	<div th:each="exemplaire: ${exemplaires}"
 		class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300">
@@ -43,7 +48,7 @@
 			Louable : <span th:text="${exemplaire.louable} ? 'Oui' : 'Non'"></span>
 		</p>
 		<p>
-			<a class="text-blue-500 hover:text-blue-700"> <i
+			<a th:href="@{'afficher/modifier/' + ${exemplaire.no_exemplaire_jeu}}" class="text-blue-500 hover:text-blue-700"> <i
 				class="fas fa-pencil-alt"></i> <span> Modifier</span>
 			</a>
 		</p>

@@ -13,7 +13,7 @@ import fr.eni.ludotheque.bo.Genre;
 import fr.eni.ludotheque.bo.Jeu;
 
 @Repository
-public class JeuRepositoryBouchonImpl implements JeuRepository{
+public abstract class JeuRepositoryBouchonImpl implements JeuRepository{
 	private static int idxJeu = 1;
     private List<Jeu> jeux;
 
@@ -75,6 +75,12 @@ public class JeuRepositoryBouchonImpl implements JeuRepository{
 
 	@Override
 	public void deleteExemplaire(int noExemplaire) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateExemplaire(int noExemplaire) {
 		// TODO Auto-generated method stub
 		
 	}

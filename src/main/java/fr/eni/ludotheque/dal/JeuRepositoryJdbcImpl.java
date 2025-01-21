@@ -162,6 +162,7 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 
 		return Optional.ofNullable(exemplaire);
 	}
+	
 	@Override
 	public List<Genre> getGenresByNoJeu(Integer noJeu) {		
 		String sql = "select genres.no_genre as noGenre, libelle "

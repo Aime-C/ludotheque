@@ -3,6 +3,8 @@ package fr.eni.ludotheque.bo;
 import org.checkerframework.common.aliasing.qual.Unique;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 public class Exemplaire {

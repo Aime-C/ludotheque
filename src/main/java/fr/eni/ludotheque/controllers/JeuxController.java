@@ -39,21 +39,6 @@ public class JeuxController {
         return "index";
     }
 
-    @GetMapping("/{noJeu}/afficher")
-    public String pageAfficherJeu(@PathVariable("noJeu") Integer noJeu, Model model) {
-    	
-    	Optional<Jeu> optJeu = jeuService.getById(noJeu);
-    	
-    	if(optJeu.isEmpty()) {
-    		//TODO : Erreur
-    		throw new RuntimeException("Le jeu " + noJeu +" n'a pas été trouvé. ");
-    	}
-    	List<Exemplaire> exemplaires = jeuService.getAllExemplaires(noJeu);
-        model.addAttribute("exemplaires", exemplaires);
-        model.addAttribute("jeu", optJeu.get());
-        model.addAttribute("body", "pages/jeux/jeu");
-        return "index";
-    }
 
     @GetMapping("/ajouter")
     public String pageAjouterJeu(Model model) {
@@ -93,6 +78,22 @@ public class JeuxController {
         return "redirect:/jeux";
     }
     
+    @GetMapping("/{noJeu}/afficher")
+    public String pageAfficherJeu(@PathVariable("noJeu") Integer noJeu, Model model) {
+    	
+    	Optional<Jeu> optJeu = jeuService.getById(noJeu);
+    	
+    	if(optJeu.isEmpty()) {
+    		//TODO : Erreur
+    		throw new RuntimeException("Le jeu " + noJeu +" n'a pas été trouvé. ");
+    	}
+    	List<Exemplaire> exemplaires = jeuService.getAllExemplaires(noJeu);
+        model.addAttribute("exemplaires", exemplaires);
+        model.addAttribute("jeu", optJeu.get());
+        model.addAttribute("body", "pages/jeux/jeu");
+        return "index";
+    }
+    
     @GetMapping("/{noJeu}/afficher/supprimer/{no_exemplaire_jeu}")
     public String pageSupprimerExemplaire(@PathVariable("noJeu") Integer noJeu, @PathVariable("no_exemplaire_jeu") Integer noExemplaire, Model model) {
     	jeuService.deleteExemplaire(noExemplaire);
@@ -107,6 +108,13 @@ public class JeuxController {
     	return "index";
     }
     
+    @GetMapping("/{noJeu}/afficher/ajouter")
+    public String pageAjouterExemplaire(@PathVariable("noJeu") Integer noJeu, Model model) {
+    	model.addAttribute("exemplaire", new Exemplaire());
+    	model.addAttribute("body", "pages/jeux/formulaire-exemplaire");
+    	return "index";
+    }
+    
     @PostMapping({"/{noJeu}/afficher/modifier/enregistrer","/{noJeu}/afficher/enregistrer" })
     public String saveExemplaire(@PathVariable("noJeu") Integer noJeu, Model model, @Valid Exemplaire exemplaire,  BindingResult bindingResult ) {
     	model.addAttribute("body", "pages/jeux/jeux");
@@ -116,12 +124,5 @@ public class JeuxController {
     	}
         jeuService.saveExemplaire(exemplaire);
         return "redirect:/jeux/"+noJeu+"/afficher";
-    }
-    
-    @GetMapping("/{noJeu}/afficher/ajouter")
-    public String pageAjouterExemplaire(@PathVariable("noJeu") Integer noJeu, Model model) {
-    	model.addAttribute("exemplaire", new Exemplaire());
-    	model.addAttribute("body", "pages/jeux/formulaire-exemplaire");
-    	return "index";
     }
 }

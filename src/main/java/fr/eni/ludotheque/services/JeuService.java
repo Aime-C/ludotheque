@@ -17,4 +17,8 @@ public interface JeuService extends ICrudService <Jeu>{
 
 	Optional<Exemplaire> getExemplaireById(int noExemplaire);
 
+	void saveExemplaire(Exemplaire exemplaire);
+
+	void addExemplaire(Exemplaire exemplaire);
+
 }

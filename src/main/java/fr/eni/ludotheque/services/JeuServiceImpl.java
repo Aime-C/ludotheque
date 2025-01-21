@@ -75,6 +75,21 @@ public class JeuServiceImpl implements JeuService{
 	}
 	
 	@Override
+	public void saveExemplaire(Exemplaire exemplaire) {
+		if(exemplaire.getNo_exemplaire_jeu()!=null) {
+			jeuRepo.updateExemplaire(exemplaire);
+		}else {
+			jeuRepo.addExemplaire(exemplaire);
+		}
+		
+	}
+	
+	@Override
+	public void addExemplaire(Exemplaire exemplaire) {
+		jeuRepo.addExemplaire(exemplaire);
+	}
+	
+	@Override
 	public void updateExemplaire(Exemplaire exemplaire) {
 		jeuRepo.updateExemplaire(exemplaire);
 	}

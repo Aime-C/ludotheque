@@ -110,6 +110,9 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 		String sql = "delete from jeux_genres  where no_jeu = ? ";
 		jdbcTemplate.update(sql, noJeu);
 		
+		sql = "delete from exemplaires_jeux where no_jeu = ? ";
+		jdbcTemplate.update(sql, noJeu);
+		
 		sql = "delete from jeux  where no_jeu = ? ";
 		int nbRows = jdbcTemplate.update(sql, noJeu);
 		if(nbRows != 1) {
@@ -120,7 +123,7 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 	
 	@Override
 	public List<Exemplaire> getAllExemplaires(int noJeu) {
-		String sql = "SELECT ej.no_exemplaire_jeu, ej.codebarre, ej.louable FROM exemplaires_jeux as ej INNER JOIN jeux ON jeux.no_jeu = ej.no_jeu WHERE jeux.no_jeu = ? ORDER BY no_exemplaire_jeu ASC";
+		String sql = "SELECT ej.no_exemplaire_jeu, ej.no_jeu,ej.codebarre, ej.louable FROM exemplaires_jeux as ej INNER JOIN jeux ON jeux.no_jeu = ej.no_jeu WHERE jeux.no_jeu = ? ORDER BY no_exemplaire_jeu ASC";
 		List<Exemplaire> exemplaires = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Exemplaire.class), noJeu);
 				
 		return exemplaires;
@@ -141,6 +144,13 @@ public class JeuRepositoryJdbcImpl implements JeuRepository{
 	public void updateExemplaire(Exemplaire exemplaire) {
 		String sql = "UPDATE exemplaires_jeux SET codebarre = ?, louable = ? WHERE no_exemplaire_jeu = ?";
 		jdbcTemplate.update(sql, exemplaire.getCodebarre(), exemplaire.getLouable(), exemplaire.getNo_exemplaire_jeu());
+		
+	}
+	
+	@Override
+	public void addExemplaire(Exemplaire exemplaire) {
+		String sql = "INSERT INTO exemplaires_jeux (no_jeu, codebarre, louable) VALUES (?,?,?)";
+		jdbcTemplate.update(sql, exemplaire.getNo_jeu() ,exemplaire.getCodebarre(), exemplaire.getLouable());
 		
 	}
 

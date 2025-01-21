@@ -107,13 +107,21 @@ public class JeuxController {
     	return "index";
     }
     
-    @PostMapping("/{noJeu}/afficher/modifier/enregistrer")
+    @PostMapping({"/{noJeu}/afficher/modifier/enregistrer","/{noJeu}/afficher/enregistrer" })
     public String saveExemplaire(@PathVariable("noJeu") Integer noJeu, Model model, @Valid Exemplaire exemplaire,  BindingResult bindingResult ) {
-    	model.addAttribute("body", "pages/jeux/formulaire-jeu");
+    	model.addAttribute("body", "pages/jeux/jeux");
+    	exemplaire.setNo_jeu(noJeu);
     	if(bindingResult.hasErrors()) {
-    		return "index";
+    		return "redirect:/jeux/"+noJeu+"/afficher";
     	}
-        jeuService.updateExemplaire(exemplaire);
+        jeuService.saveExemplaire(exemplaire);
         return "redirect:/jeux/"+noJeu+"/afficher";
+    }
+    
+    @GetMapping("/{noJeu}/afficher/ajouter")
+    public String pageAjouterExemplaire(@PathVariable("noJeu") Integer noJeu, Model model) {
+    	model.addAttribute("exemplaire", new Exemplaire());
+    	model.addAttribute("body", "pages/jeux/formulaire-exemplaire");
+    	return "index";
     }
 }

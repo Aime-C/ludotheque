@@ -17,4 +17,6 @@ public interface JeuRepository extends ICrudRepository<Jeu>{
 	void updateExemplaire(Exemplaire exemplaire);
 
 	Optional<Exemplaire> getExemplaireById(int id);
+
+	void addExemplaire(Exemplaire exemplaire);
 }

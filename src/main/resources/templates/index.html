@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>La crypte des jeux</title>
@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-</head>
+    </head>
 <body>
 
 <nav class="bg-gray-800">
@@ -15,7 +15,7 @@
 
         <div class="flex flex-1 items-center justify-center  h-16">
             <div class="flex shrink-0 items-center">
-                <img width=128 class="h-10 w-auto" src="/la-cryte-du-jeu-logo-16133977282.jpg" alt="Your Company">
+                <img width=128 class="h-10 w-auto" src="la-cryte-du-jeu-logo-16133977282.jpg" alt="Your Company">
             </div>
             <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4">
@@ -23,10 +23,18 @@
                        class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Jeux</a>
                     <a th:href="@{/clients}"
                        class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Clients</a>
+                    <div sec:authorize="!isAuthenticated()">
+  <a href="/login" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Se connecter</a>
+					</div>   
+					<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post">
+					<button class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Se déconnecter</button>
+					</form>
+					</div>
+                    
                     <a href="#"
                        class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">?</a>
-                    <a href="#"
-                       class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">?</a>
+                       
                 </div>
             </div>
         </div>

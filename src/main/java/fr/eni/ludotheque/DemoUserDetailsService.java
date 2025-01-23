@@ -1,41 +1,45 @@
 package fr.eni.ludotheque;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+import fr.eni.ludotheque.bo.Utilisateur;
+import fr.eni.ludotheque.services.UtilisateurService;
+
+@Service
 public class DemoUserDetailsService implements UserDetailsService {
-	
-	private PasswordEncoder passwordEncoder;
-	
-	public DemoUserDetailsService(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-	
-	//TODO : injection d'un repo 
-	
-	// Méthode appellée à chaque fois qu'un utilisateur tente de se connecter
+
+	private UtilisateurService utilisateurService;
+
+	public DemoUserDetailsService(UtilisateurService utilisateurService) {
+		this.utilisateurService = utilisateurService;
+	}
+
 	@Override
+	/*
+	 * Est appelée à chaque connexion utilisateur username : login saisi par
+	 * l'utilisateur
+	 */
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		UserBuilder userBuilder = User.builder();
-		if ("toto".equals(username)) {
-			String motDePasse = passwordEncoder.encode("toto");
-			userBuilder.username(username).password(motDePasse).roles("UTILISATEUR", "ADMIN");
-		} else if ("titi".equals(username)) {
-			String motDePasse = passwordEncoder.encode("titi");
-			userBuilder.username(username).password(motDePasse).roles("UTILISATEUR", "ADMIN");
-		}else {
-			throw new UsernameNotFoundException(username);
-		}
+		Optional<Utilisateur> utilOpt = utilisateurService.findUtilisateurByEmail(username);
 
-		return userBuilder.build();
+		UserDetails user = null;
+
+		if (utilOpt.isPresent()) {
+			Utilisateur utilisateur = utilOpt.get();
+			user = User.builder()
+					.username(username)
+					.password(utilisateur.getMotDePasse()) 
+					.roles(utilisateur.getRole()).build();
+			return user;
+		}
+		throw new UsernameNotFoundException(username + " not found.");
 	}
 
 }
